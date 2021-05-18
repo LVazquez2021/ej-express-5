@@ -1,3 +1,10 @@
+const express = require('express');
+const path = require('path');
+const app = express();
+
+const PORT = 3030;
+
+
 //users
 const users = [
 
@@ -10,13 +17,6 @@ const users = [
         password: '456'
     }
 ]
-const express = require('express');
-const path = require('path');
-const app = express();
-
-const PORT = 3030;
-
-
 
 
 
@@ -25,6 +25,8 @@ const PORT = 3030;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'views')));
 
+
+//peticiones 
 app.get('/', function(req, res) {
     res.sendFile(path.join(__dirname, 'views/home.html'));
 })
@@ -62,10 +64,6 @@ app.post('/register', function(req, res) {
         if (userName === users[i].user && password === users[i].password) {
             newUser = false;
         }
-        /*         } else if (userName != users[i].user && password != users[i].password) {
-                    if (password === passwordConfirm) {
-                        newUser = true;
-                    } */
     }
     if (newUser === false) {
         res.sendFile(path.join(__dirname, 'views/register.html'));
