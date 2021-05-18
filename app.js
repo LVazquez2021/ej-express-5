@@ -68,8 +68,12 @@ app.post('/register', function(req, res) {
     if (newUser === false) {
         res.sendFile(path.join(__dirname, 'views/register.html'));
     } else {
-        users.push({ user: userName, password: password });
-        res.sendFile(path.join(__dirname, 'views/login.html'));
+        if (password === passwordConfirm) {
+            users.push({ user: userName, password: password });
+            res.sendFile(path.join(__dirname, 'views/login.html'));
+        } else {
+            res.send('<h1>las contraseñas no coinciden</h1>')
+        }
     }
     console.log(users);
 })
